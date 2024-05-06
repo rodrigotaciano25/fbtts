@@ -1,5 +1,6 @@
-package com.example.FBTTS.security;
+package com.example.fbtts.entity;
 
+import com.example.fbtts.security.UserRole;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,12 +20,20 @@ import java.util.Collections;
 public class User implements UserDetails {
     @Id
     private String id;
-    private String username;
+    private String type = "BetStrategy";
     private String email;
+    private String username;
     private String password;
     private UserRole role;
 
-    public User(String email, String password, UserRole role) {
+    private int clicks;
+    private boolean hasPayments;
+
+    private String language;
+    private String currency;
+
+    public User(String username, String email, String password, UserRole role) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -37,11 +46,6 @@ public class User implements UserDetails {
         } else {
             return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
     }
 
     @Override

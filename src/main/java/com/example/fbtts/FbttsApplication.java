@@ -1,4 +1,4 @@
-package com.example.FBTTS;
+package com.example.fbtts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

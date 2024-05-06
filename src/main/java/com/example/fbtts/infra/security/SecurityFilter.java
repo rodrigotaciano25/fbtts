@@ -1,6 +1,6 @@
-package com.example.FBTTS.infra.security;
+package com.example.fbtts.infra.security;
 
-import com.example.FBTTS.repositories.UserRepository;
+import com.example.fbtts.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

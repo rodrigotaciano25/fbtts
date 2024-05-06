@@ -1,7 +1,7 @@
-package com.example.FBTTS.controllers;
+package com.example.fbtts.controller.authentication;
 
-import com.example.FBTTS.repositories.UserRepository;
-import com.example.FBTTS.security.User;
+import com.example.fbtts.repository.UserRepository;
+import com.example.fbtts.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

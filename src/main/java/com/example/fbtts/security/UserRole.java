@@ -1,4 +1,4 @@
-package com.example.FBTTS.security;
+package com.example.fbtts.security;
 
 import lombok.Getter;
 

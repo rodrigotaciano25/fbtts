@@ -2,8 +2,8 @@ POST localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "teste@email.com",
-  "password": "teste"
+  "email": "pogacar@giro.it",
+  "password": "tadej"
 }
 
 ###
@@ -12,7 +12,8 @@ POST localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "email": "teste@email.com",
-  "password": "teste",
+  "username": "tadej pogacar",
+  "email": "pogacar@giro.it",
+  "password": "tadej",
   "role": "USER"
 }

@@ -1,6 +1,6 @@
-package com.example.FBTTS.services;
+package com.example.fbtts.service.security;
 
-import com.example.FBTTS.repositories.UserRepository;
+import com.example.fbtts.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
