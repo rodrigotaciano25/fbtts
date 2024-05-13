@@ -3,6 +3,7 @@ package com.example.fbtts.entity;
 import com.example.fbtts.security.UserRole;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,8 +21,13 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 @Document(collection = "users")
 public class User implements UserDetails {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "user_sequence";
+
     @Id
-    private String id;
+    private Long id;
+
     private String type = "BetStrategy";
     private String email;
     private String username;

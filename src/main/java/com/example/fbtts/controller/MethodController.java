@@ -1,9 +1,12 @@
 package com.example.fbtts.controller;
 
+import com.example.fbtts.entity.League;
 import com.example.fbtts.entity.Method;
 import com.example.fbtts.entity.User;
 import com.example.fbtts.infra.security.TokenService;
+import com.example.fbtts.repository.MethodRepository;
 import com.example.fbtts.service.MethodService;
+import com.example.fbtts.service.SequenceGeneratorService;
 import com.example.fbtts.service.security.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,16 @@ import org.springframework.web.bind.annotation.*;
 public class MethodController {
     private final UserService userService;
     private MethodService methodService;
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private MethodRepository methodRepository;
+
+    @PostMapping("/saveMethod")
+    public Method saveMethod(@RequestBody Method method) {
+        method.setId((long) sequenceGeneratorService.getSequenceNumber(Method.SEQUENCE_NAME));
+        return methodRepository.save(method);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Method> findById(@PathVariable long id) {

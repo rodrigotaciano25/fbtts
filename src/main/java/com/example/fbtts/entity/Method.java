@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 @Data
 @Document(collection = "methods")
 public class Method {
+	@Transient
+	public static final String SEQUENCE_NAME = "method_sequence";
 
 	@Id
 	private Long id;

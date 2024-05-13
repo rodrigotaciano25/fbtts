@@ -1,10 +1,18 @@
 package com.example.fbtts.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "matches")
 @Data
 public class Match {
 	// informações de um determinado jogo
+	@Transient
+	public static final String SEQUENCE_NAME = "match_sequence";
+
+	@Id
 	private Long id;
 
 	private String flag;
