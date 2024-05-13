@@ -1,65 +1,56 @@
 package com.example.fbtts.entity;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Data
+@Document(collection = "methods")
 public class Method {
-	// entidade de uma estratégia
+
+	@Id
 	private Long id;
-	
+
 	private String title;
 	private String method;
 	private List<Long> leagues;
-	
+
 	private String market;
 	private String operator;
 	private String value;
-	
+
 	@JsonProperty("isPublic")
 	private boolean isPublic;
-	
+
+	@Setter
 	@JsonProperty("isLive")
 	private boolean isLive;
-	
+
 	private int total;
 	private int wins;
-	
+
 	private double odd;
 	private double profit;
 
 	private boolean hasMatchesNext;
-	
+
 	private String user;
-	
+
 	private String dateCreate; // create date
 	private String dateUpdate; // last update date
-	
-	
+
 	// follow data
-	
 	private int views;
-	
+
+	@Setter
 	@JsonProperty("isFavorite")
-	private boolean isFavorite; // has the user logged in this method as a favorite method 
-	
-	
+	private boolean isFavorite; // has the user logged in this method as a favorite method
+
 	public Method() {
-		// do nothing
+		// Do nothing
 	}
-
-	public void setIsPublic(boolean isPublic) {
-		this.isPublic = isPublic;
-	}
-
-	public void setIsLive(boolean isLive) {
-		this.isLive = isLive;
-	}
-
-	public void setIsFavorite(boolean isFavorite) {
-		this.isFavorite = isFavorite;
-	}
-	
 }

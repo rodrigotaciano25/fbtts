@@ -3,25 +3,34 @@ package com.example.fbtts.service;
 import com.example.fbtts.entity.Method;
 import com.example.fbtts.repository.MethodRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class MethodService {
-    private final MethodRepository methodRepository;
+    @Autowired
+    private MethodRepository methodRepository;
 
     public Method findById(long id) {
-        System.out.println("Searching for method with id: " + id);
-        Method method = methodRepository.findById(id);
-        System.out.println("Found team: " + method);
-        return method;
+        return methodRepository.findById(id);
     }
 
     public Method findByTitleAndUser(String title, String user) {
-        System.out.println("Searching method with the title " + title + "and user: " + user);
-        Method method = methodRepository.findByTitleAndUser(title, user);
-        System.out.println("Found method: " + method);
-        return method;
+        return methodRepository.findByTitleAndUser(title, user);
     }
 
+    public List<Method> getAllByUser(String user) {
+        return methodRepository.findAllByUser(user);
+    }
+
+    public Method findByUser(String user) {
+        return methodRepository.findByUser(user);
+    }
+
+    public Method addMethod(Method method) {
+        return methodRepository.save(method);
+    }
 }

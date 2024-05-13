@@ -19,7 +19,7 @@ public class LeagueTableRowController {
     @GetMapping("/{teamId}")
     public ResponseEntity<LeagueTableRow> findByTeamId(@PathVariable long teamId) {
         System.out.println(teamId);
-        LeagueTableRow leagueTableRow = leagueTableRowService.findById(teamId);
+        LeagueTableRow leagueTableRow = leagueTableRowService.findByTeamId(teamId);
         if (leagueTableRow != null) {
             return ResponseEntity.ok(leagueTableRow);
         } else {

@@ -8,8 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +29,7 @@ public class User implements UserDetails {
     private UserRole role;
 
     private int clicks;
+    private List<Method> methods;
     private boolean hasPayments;
 
     private String language;
@@ -37,6 +40,7 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.clicks = 75;
     }
 
     @Override
@@ -66,5 +70,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addMethod(Method method) {
+        methods.add(method);
     }
 }

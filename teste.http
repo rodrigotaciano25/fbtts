@@ -2,8 +2,8 @@ POST localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "pogacar@giro.it",
-  "password": "tadej"
+  "email": "duartenneves@gmail.com",
+  "password": "duarte"
 }
 
 ###
@@ -12,8 +12,13 @@ POST localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "username": "tadej pogacar",
-  "email": "pogacar@giro.it",
-  "password": "tadej",
+  "username": "duarte neves",
+  "email": "duartenneves@gmail.com",
+  "password": "duarte",
   "role": "USER"
 }
+
+###
+
+GET http://localhost:8080/api/methods/duartenneves@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImR1YXJ0ZW5uZXZlc0BnbWFpbC5jb20iLCJleHAiOjE3MTUzODIwMTN9.HMCJ0bGB7Dg7PYA0PF88aQcYmOVpcWh7AJi63gmqBjo

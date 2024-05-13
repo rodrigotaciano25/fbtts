@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class LeagueTableRowService {
     private final LeagueTableRowRepository leagueTableRowRepository;
 
-    public LeagueTableRow findById(long teamId) {
+    public LeagueTableRow findByTeamId(long teamId) {
         System.out.println("Searching for team with name: " + teamId);
         LeagueTableRow leagueTableRow = leagueTableRowRepository.findByTeamId(teamId);
         System.out.println("Found team: " + leagueTableRow);
