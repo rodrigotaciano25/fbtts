@@ -1,6 +1,5 @@
 package com.example.fbtts.controller.authentication;
 
-import com.example.fbtts.entity.League;
 import com.example.fbtts.infra.security.TokenService;
 import com.example.fbtts.repository.UserRepository;
 import com.example.fbtts.security.AuthenticationDTO;

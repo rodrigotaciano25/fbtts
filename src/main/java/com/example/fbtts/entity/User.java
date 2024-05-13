@@ -4,6 +4,7 @@ import com.example.fbtts.security.UserRole;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +36,8 @@ public class User implements UserDetails {
     private UserRole role;
 
     private int clicks;
-    private List<Method> methods;
+    @DBRef
+    private List<Method> methods = new ArrayList<>();
     private boolean hasPayments;
 
     private String language;

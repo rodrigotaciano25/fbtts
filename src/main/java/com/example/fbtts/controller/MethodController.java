@@ -1,6 +1,5 @@
 package com.example.fbtts.controller;
 
-import com.example.fbtts.entity.League;
 import com.example.fbtts.entity.Method;
 import com.example.fbtts.entity.User;
 import com.example.fbtts.infra.security.TokenService;
@@ -26,12 +25,6 @@ public class MethodController {
     private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private MethodRepository methodRepository;
-
-    @PostMapping("/saveMethod")
-    public Method saveMethod(@RequestBody Method method) {
-        method.setId((long) sequenceGeneratorService.getSequenceNumber(Method.SEQUENCE_NAME));
-        return methodRepository.save(method);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Method> findById(@PathVariable long id) {
@@ -94,9 +87,11 @@ public class MethodController {
         }
 
         Method newMethod = methodService.addMethod(method);
+        newMethod.setId((long) sequenceGeneratorService.getSequenceNumber(Method.SEQUENCE_NAME));
         String email = method.getUser();
         User user = userService.findByEmail(email);
         user.addMethod(newMethod);
+        methodRepository.save(method);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newMethod);
     }
