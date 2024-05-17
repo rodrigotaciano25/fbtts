@@ -8,7 +8,7 @@ import java.util.List;
 public interface MethodRepository extends MongoRepository<Method, Long> {
     public Method findById(long id);
 
-    public Method findByTitleAndUser(String title, String user);
+    Method findByTitleAndUser(String title, String user);
 
     List<Method> findAllByUser(String email);
 

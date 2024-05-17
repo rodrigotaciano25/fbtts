@@ -27,7 +27,7 @@ public class MongoConfig {
     public MappingMongoConverter mappingMongoConverter() {
         DefaultDbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory());
         MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
-        converter.setMapKeyDotReplacement("_"); // Set dot replacement to underscore
+        converter.setMapKeyDotReplacement("_");
         converter.afterPropertiesSet();
         return converter;
     }

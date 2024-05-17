@@ -1,6 +1,5 @@
 package com.example.fbtts.controller;
 
-import com.example.fbtts.entity.League;
 import com.example.fbtts.entity.LeagueTable;
 import com.example.fbtts.service.LeagueTableService;
 import lombok.AllArgsConstructor;

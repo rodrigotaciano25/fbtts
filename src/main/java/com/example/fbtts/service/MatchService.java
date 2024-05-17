@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 public class MatchService {
     private final MatchRepository matchRepository;
 
-    public Match findById(long id) {
+    public Match findMatchById(long id) {
         return matchRepository.findById(id);
+    }
+
+    public Match findMatchByDateAndMatch(String date, String match) {
+        return matchRepository.findByDateAndMatch(date, match);
     }
 
     public Match findByRoundAndHomeAndAway(String round, String home, String away) {

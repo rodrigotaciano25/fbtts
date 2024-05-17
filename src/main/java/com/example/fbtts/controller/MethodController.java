@@ -1,8 +1,10 @@
 package com.example.fbtts.controller;
 
+import com.example.fbtts.entity.Match;
 import com.example.fbtts.entity.Method;
 import com.example.fbtts.entity.User;
 import com.example.fbtts.infra.security.TokenService;
+import com.example.fbtts.repository.MatchRepository;
 import com.example.fbtts.repository.MethodRepository;
 import com.example.fbtts.service.MethodService;
 import com.example.fbtts.service.SequenceGeneratorService;
@@ -15,6 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/methods")
 @AllArgsConstructor
@@ -25,6 +30,8 @@ public class MethodController {
     private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private MethodRepository methodRepository;
+    @Autowired
+    private MatchRepository matchRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Method> findById(@PathVariable long id) {
@@ -76,6 +83,42 @@ public class MethodController {
         } else {
             // User might not have any methods associated with them
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/matches/{leagueId}")
+    public ResponseEntity<List<Match>> findMatchesByLeague(@PathVariable String leagueId) {
+        try {
+            List<Match> matches = matchRepository.findAllByLeague(leagueId);
+            if (matches != null && !matches.isEmpty()) {
+                return ResponseEntity.ok(matches);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/{title}/{user}/addMatch")
+    public ResponseEntity<Method> addMatchToMethod(@PathVariable String title,
+                                                   @PathVariable String user,
+                                                   @RequestBody Match match) {
+        Method method = methodService.addMatchToMethod(title, user, match);
+        if (method != null) {
+            return ResponseEntity.ok(method); // Método encontrado e atualizado com sucesso
+        } else {
+            return ResponseEntity.notFound().build(); // Método não encontrado
+        }
+    }
+
+    @GetMapping("/{methodId}/matches")
+    public ResponseEntity<List<Match>> getMatchesForMethod(@PathVariable Long methodId) {
+        Method method = methodService.findById(methodId);
+        if (method != null) {
+            return ResponseEntity.ok(method.getMatches());
+        } else {
+            return ResponseEntity.notFound().build(); // Método não encontrado
         }
     }
 

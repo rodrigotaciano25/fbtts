@@ -37,7 +37,7 @@ public class MatchController {
     @GetMapping("/{id}")
     public ResponseEntity<Match> findById(@PathVariable long id) {
         System.out.println(id);
-        Match match = matchService.findById(id);
+        Match match = matchService.findMatchById(id);
         if (match != null) {
             return ResponseEntity.ok(match);
         } else {
