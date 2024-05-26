@@ -6,7 +6,6 @@ import com.example.fbtts.security.AuthenticationDTO;
 import com.example.fbtts.security.LoginResponseDTO;
 import com.example.fbtts.security.RegisterDTO;
 import com.example.fbtts.entity.User;
-import com.example.fbtts.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -74,7 +71,7 @@ public class AuthenticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.username(), data.email(), encryptedPassword, data.role());
-        newUser.setId((long) sequenceGeneratorService.getSequenceNumber(User.SEQUENCE_NAME));
+
         this.userRepository.save(newUser);
 
         return ResponseEntity.ok().build();

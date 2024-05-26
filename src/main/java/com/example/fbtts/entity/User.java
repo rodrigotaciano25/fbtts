@@ -1,5 +1,6 @@
 package com.example.fbtts.entity;
 
+import com.example.fbtts.model.Method;
 import com.example.fbtts.security.UserRole;
 import lombok.*;
 import org.springframework.data.annotation.Id;

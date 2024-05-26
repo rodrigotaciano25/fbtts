@@ -1,50 +1,27 @@
 package com.example.fbtts.controller;
 
-import com.example.fbtts.entity.League;
-import com.example.fbtts.repository.LeagueRepository;
-import com.example.fbtts.service.LeagueService;
-import com.example.fbtts.service.SequenceGeneratorService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import java.io.IOException;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 @RestController
-@RequestMapping("/api/leagues")
-@AllArgsConstructor
 public class LeagueController {
-    @Autowired
-    private LeagueRepository leagueRepository;
-
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
-
-    private LeagueService leagueService;
-
-    @PostMapping("/saveLeague")
-    public League save(@RequestBody League league) {
-        // generate sequence
-        league.setId((long) sequenceGeneratorService.getSequenceNumber(League.SEQUENCE_NAME));
-        return leagueRepository.save(league);
-    }
 
     @GetMapping("/leagues")
-    public List<League> getAllLeagues() {
-        return leagueRepository.findAll();
-    }
+    public ResponseEntity<String> getLeagues() throws IOException {
+        // Caminho do arquivo JSON
+        String filePath = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\leagues.json";
 
-    @GetMapping("/{name}")
-    public ResponseEntity<League> findByName(@PathVariable String name) {
-        System.out.println(name);
-        League league = leagueService.findByName(name);
-        if (league != null) {
-            return ResponseEntity.ok(league);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+        // Lendo o conteúdo do arquivo JSON
+        File file = new File(filePath);
+        byte[] jsonData = Files.readAllBytes(file.toPath());
+        String data = new String(jsonData, StandardCharsets.UTF_8);
 
+        // Retornando os dados JSON
+        return ResponseEntity.ok(data);
+    }
 }
-
