@@ -25,6 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = MethodController.class)
 public class MethodTest {
 
+    private static final String BASE_PATH = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -34,10 +36,11 @@ public class MethodTest {
     @MockBean
     private UserRepository userRepository; // Mock UserRepository
 
+
     @Test
     @WithMockUser(username = "roman", roles = {"USER"})
     public void whenGetMethods_thenReturnJson() throws Exception {
-        String filePath = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\methods.json";
+        String filePath = BASE_PATH + "methods.json";
         File file = new File(filePath);
         byte[] jsonData = Files.readAllBytes(file.toPath());
         String expectedContent = new String(jsonData, StandardCharsets.UTF_8);
@@ -51,7 +54,7 @@ public class MethodTest {
     @Test
     @WithMockUser(username = "roman", roles = {"USER"})
     public void whenGetMatches_thenReturnJson() throws Exception {
-        String filePath = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\matches.json";
+        String filePath = BASE_PATH + "matches.json";
         File file = new File(filePath);
         byte[] jsonData = Files.readAllBytes(file.toPath());
         String expectedContent = new String(jsonData, StandardCharsets.UTF_8);

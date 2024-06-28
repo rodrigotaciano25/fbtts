@@ -25,6 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = LeagueController.class)
 public class LeagueTest {
 
+    private static final String BASE_PATH = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,7 +39,7 @@ public class LeagueTest {
     @Test
     @WithMockUser(username = "roman", roles = {"USER"})
     public void whenGetLeagues_thenReturnJson() throws Exception {
-        String filePath = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\leagues.json";
+        String filePath = BASE_PATH + "leagues.json";
         File file = new File(filePath);
         byte[] jsonData = Files.readAllBytes(file.toPath());
         String expectedContent = new String(jsonData, StandardCharsets.UTF_8);
@@ -51,7 +53,7 @@ public class LeagueTest {
     @Test
     @WithMockUser(username = "roman", roles = {"USER"})
     public void whenGetLeagueDetailed_thenReturnJson() throws Exception {
-        String filePath = "C:\\Users\\rodyt\\OneDrive\\Ambiente de Trabalho\\React Native TFC\\StickerSmash - Cópia\\JSON\\bundesliga1.json";
+        String filePath = BASE_PATH + "bundesliga1.json";
         File file = new File(filePath);
         byte[] jsonData = Files.readAllBytes(file.toPath());
         String expectedContent = new String(jsonData, StandardCharsets.UTF_8);
