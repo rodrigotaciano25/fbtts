@@ -32,27 +32,21 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationDTO data) {
         try {
-            // Verifica se os dados de entrada estão corretos
             System.out.println("Email: " + data.email() + ", Password: " + data.password());
 
-            // Verifica se o usuário existe no banco de dados
             User user = userRepository.findByEmail(data.email());
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found.");
             }
 
-            // Verifica se a senha está correta
             if (!passwordEncoder.matches(data.password(), user.getPassword())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials.");
             }
 
-            // Gera o token JWT
             var token = tokenService.generateToken(user);
 
-            // Retorna o token como resposta
             return ResponseEntity.ok(LoginResponseDTO.fromUserAndToken(user, token));
         } catch (Exception e) {
-            // Em caso de falha na autenticação, retorna uma resposta de erro
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed.");
         }
     }
